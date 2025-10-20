@@ -1,0 +1,1 @@
+[{"id":1,"name":"giorgi","age":22,"isSmoker":false},{"id":2,"name":"nika","age":23,"isSmoker":false},{"id":3,"name":"Luka","age":24,"isSmoker":true},{"id":4,"name":"nini","age":36,"isSmoker":true},{"id":5,"name":"test","age":"15","isSmoker":"false"},{"id":6,"name":"test","age":15,"isSmoker":true}]
