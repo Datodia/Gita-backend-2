@@ -1,0 +1,554 @@
+[
+    {
+        "id": 2,
+        "name": "Saw",
+        "genre": "Comedy",
+        "rating": 8.9
+    },
+    {
+        "id": 3,
+        "name": "hangover",
+        "genre": "comedy",
+        "rating": 2.2
+    },
+    {
+        "id": 4,
+        "name": "hangover 2",
+        "genre": "comedy",
+        "rating": 5.2
+    },
+    {
+        "id": 5,
+        "name": "Inception",
+        "genre": "Trialer",
+        "rating": 8.9
+    },
+    {
+        "id": 6,
+        "name": "Deadpool",
+        "genre": "Action",
+        "rating": 7.7
+    },
+    {
+        "id": 7,
+        "name": "Mysterious Quest",
+        "genre": "Comedy",
+        "rating": 7.4
+    },
+    {
+        "id": 8,
+        "name": "Dark Nightmare",
+        "genre": "Action",
+        "rating": 7.4
+    },
+    {
+        "id": 9,
+        "name": "Mysterious Light",
+        "genre": "Documentary",
+        "rating": 0.9
+    },
+    {
+        "id": 10,
+        "name": "Scary Adventure",
+        "genre": "Comedy",
+        "rating": 0.9
+    },
+    {
+        "id": 11,
+        "name": "Dark Revenge",
+        "genre": "Musical",
+        "rating": 0.3
+    },
+    {
+        "id": 12,
+        "name": "Dark Light",
+        "genre": "Documentary",
+        "rating": 4.2
+    },
+    {
+        "id": 13,
+        "name": "Romantic Escape",
+        "genre": "Horror",
+        "rating": 8.1
+    },
+    {
+        "id": 14,
+        "name": "Great Fire",
+        "genre": "Action",
+        "rating": 7.0
+    },
+    {
+        "id": 15,
+        "name": "Funny Dream",
+        "genre": "Action",
+        "rating": 2.2
+    },
+    {
+        "id": 16,
+        "name": "Heartbreaking Love",
+        "genre": "Drama",
+        "rating": 0.9
+    },
+    {
+        "id": 17,
+        "name": "Amazing Love",
+        "genre": "Sci-Fi",
+        "rating": 6.0
+    },
+    {
+        "id": 18,
+        "name": "Heartbreaking Adventure",
+        "genre": "Animation",
+        "rating": 5.4
+    },
+    {
+        "id": 19,
+        "name": "Twisted War",
+        "genre": "Drama",
+        "rating": 5.5
+    },
+    {
+        "id": 20,
+        "name": "Uplifting Shadow",
+        "genre": "Musical",
+        "rating": 8.9
+    },
+    {
+        "id": 21,
+        "name": "Funny Escape",
+        "genre": "Thriller",
+        "rating": 7.0
+    },
+    {
+        "id": 22,
+        "name": "Great Shadow",
+        "genre": "Thriller",
+        "rating": 7.7
+    },
+    {
+        "id": 23,
+        "name": "Amazing Ice",
+        "genre": "Thriller",
+        "rating": 8.7
+    },
+    {
+        "id": 24,
+        "name": "Scary Dream",
+        "genre": "Animation",
+        "rating": 6.4
+    },
+    {
+        "id": 25,
+        "name": "Funny Journey",
+        "genre": "Sci-Fi",
+        "rating": 3.6
+    },
+    {
+        "id": 26,
+        "name": "Mysterious Dream",
+        "genre": "Drama",
+        "rating": 6.1
+    },
+    {
+        "id": 27,
+        "name": "Epic Revenge",
+        "genre": "Thriller",
+        "rating": 1.6
+    },
+    {
+        "id": 28,
+        "name": "Scary Dream",
+        "genre": "Documentary",
+        "rating": 2.2
+    },
+    {
+        "id": 29,
+        "name": "Funny Ice",
+        "genre": "Comedy",
+        "rating": 2.3
+    },
+    {
+        "id": 30,
+        "name": "Great Fire",
+        "genre": "Sci-Fi",
+        "rating": 4.0
+    },
+    {
+        "id": 31,
+        "name": "Amazing Nightmare",
+        "genre": "Musical",
+        "rating": 8.8
+    },
+    {
+        "id": 32,
+        "name": "Funny Nightmare",
+        "genre": "Animation",
+        "rating": 4.0
+    },
+    {
+        "id": 33,
+        "name": "Twisted Shadow",
+        "genre": "Animation",
+        "rating": 1.4
+    },
+    {
+        "id": 34,
+        "name": "Epic Nightmare",
+        "genre": "Documentary",
+        "rating": 5.4
+    },
+    {
+        "id": 35,
+        "name": "Adventurous Escape",
+        "genre": "Romance",
+        "rating": 9.0
+    },
+    {
+        "id": 36,
+        "name": "Scary Love",
+        "genre": "Thriller",
+        "rating": 10.0
+    },
+    {
+        "id": 37,
+        "name": "Epic Revenge",
+        "genre": "Animation",
+        "rating": 0.9
+    },
+    {
+        "id": 38,
+        "name": "Great Ice",
+        "genre": "Drama",
+        "rating": 1.5
+    },
+    {
+        "id": 39,
+        "name": "Epic Fire",
+        "genre": "Romance",
+        "rating": 6.0
+    },
+    {
+        "id": 40,
+        "name": "Scary War",
+        "genre": "Musical",
+        "rating": 10.0
+    },
+    {
+        "id": 41,
+        "name": "Action-packed Dream",
+        "genre": "Documentary",
+        "rating": 8.6
+    },
+    {
+        "id": 42,
+        "name": "Great Shadow",
+        "genre": "Drama",
+        "rating": 6.8
+    },
+    {
+        "id": 43,
+        "name": "Action-packed Fire",
+        "genre": "Horror",
+        "rating": 7.7
+    },
+    {
+        "id": 44,
+        "name": "Funny Quest",
+        "genre": "Horror",
+        "rating": 4.3
+    },
+    {
+        "id": 45,
+        "name": "Romantic Adventure",
+        "genre": "Horror",
+        "rating": 9.7
+    },
+    {
+        "id": 46,
+        "name": "Heartbreaking Journey",
+        "genre": "Documentary",
+        "rating": 9.1
+    },
+    {
+        "id": 47,
+        "name": "Uplifting Shadow",
+        "genre": "Horror",
+        "rating": 8.4
+    },
+    {
+        "id": 48,
+        "name": "Action-packed Escape",
+        "genre": "Thriller",
+        "rating": 1.5
+    },
+    {
+        "id": 49,
+        "name": "Heartbreaking Journey",
+        "genre": "Documentary",
+        "rating": 9.5
+    },
+    {
+        "id": 50,
+        "name": "Twisted Revenge",
+        "genre": "Comedy",
+        "rating": 6.0
+    },
+    {
+        "id": 51,
+        "name": "Romantic Adventure",
+        "genre": "Drama",
+        "rating": 9.3
+    },
+    {
+        "id": 52,
+        "name": "Twisted Ice",
+        "genre": "Horror",
+        "rating": 2.4
+    },
+    {
+        "id": 53,
+        "name": "Dark Storm",
+        "genre": "Musical",
+        "rating": 9.5
+    },
+    {
+        "id": 54,
+        "name": "Amazing Light",
+        "genre": "Animation",
+        "rating": 8.2
+    },
+    {
+        "id": 55,
+        "name": "Heartbreaking Revenge",
+        "genre": "Action",
+        "rating": 1.3
+    },
+    {
+        "id": 56,
+        "name": "Romantic Revenge",
+        "genre": "Action",
+        "rating": 2.7
+    },
+    {
+        "id": 57,
+        "name": "Uplifting Escape",
+        "genre": "Romance",
+        "rating": 9.6
+    },
+    {
+        "id": 58,
+        "name": "Twisted Revenge",
+        "genre": "Thriller",
+        "rating": 7.1
+    },
+    {
+        "id": 59,
+        "name": "Scary Shadow",
+        "genre": "Sci-Fi",
+        "rating": 4.4
+    },
+    {
+        "id": 60,
+        "name": "Action-packed Peace",
+        "genre": "Drama",
+        "rating": 2.5
+    },
+    {
+        "id": 61,
+        "name": "Amazing Love",
+        "genre": "Comedy",
+        "rating": 5.9
+    },
+    {
+        "id": 62,
+        "name": "Dark Escape",
+        "genre": "Thriller",
+        "rating": 0.1
+    },
+    {
+        "id": 63,
+        "name": "Adventurous Shadow",
+        "genre": "Comedy",
+        "rating": 2.3
+    },
+    {
+        "id": 64,
+        "name": "Twisted Adventure",
+        "genre": "Sci-Fi",
+        "rating": 0.7
+    },
+    {
+        "id": 65,
+        "name": "Dark Dream",
+        "genre": "Animation",
+        "rating": 2.1
+    },
+    {
+        "id": 66,
+        "name": "Epic Light",
+        "genre": "Musical",
+        "rating": 5.8
+    },
+    {
+        "id": 67,
+        "name": "Dark Fire",
+        "genre": "Animation",
+        "rating": 8.1
+    },
+    {
+        "id": 68,
+        "name": "Dark Quest",
+        "genre": "Drama",
+        "rating": 6.6
+    },
+    {
+        "id": 69,
+        "name": "Funny War",
+        "genre": "Romance",
+        "rating": 4.7
+    },
+    {
+        "id": 70,
+        "name": "Adventurous Adventure",
+        "genre": "Drama",
+        "rating": 0.6
+    },
+    {
+        "id": 71,
+        "name": "Adventurous Love",
+        "genre": "Drama",
+        "rating": 2.5
+    },
+    {
+        "id": 72,
+        "name": "Dark Revenge",
+        "genre": "Animation",
+        "rating": 1.4
+    },
+    {
+        "id": 73,
+        "name": "Epic Dream",
+        "genre": "Animation",
+        "rating": 2.5
+    },
+    {
+        "id": 74,
+        "name": "Twisted Quest",
+        "genre": "Animation",
+        "rating": 8.1
+    },
+    {
+        "id": 75,
+        "name": "Uplifting Revenge",
+        "genre": "Drama",
+        "rating": 0.5
+    },
+    {
+        "id": 76,
+        "name": "Action-packed Ice",
+        "genre": "Comedy",
+        "rating": 9.7
+    },
+    {
+        "id": 77,
+        "name": "Twisted Fire",
+        "genre": "Thriller",
+        "rating": 1.7
+    },
+    {
+        "id": 78,
+        "name": "Romantic Peace",
+        "genre": "Thriller",
+        "rating": 8.6
+    },
+    {
+        "id": 79,
+        "name": "Twisted Adventure",
+        "genre": "Action",
+        "rating": 3.8
+    },
+    {
+        "id": 80,
+        "name": "Scary Dream",
+        "genre": "Animation",
+        "rating": 2.9
+    },
+    {
+        "id": 81,
+        "name": "Adventurous Light",
+        "genre": "Documentary",
+        "rating": 6.6
+    },
+    {
+        "id": 82,
+        "name": "Romantic Journey",
+        "genre": "Thriller",
+        "rating": 3.0
+    },
+    {
+        "id": 83,
+        "name": "Great Escape",
+        "genre": "Documentary",
+        "rating": 0.6
+    },
+    {
+        "id": 84,
+        "name": "Funny Adventure",
+        "genre": "Comedy",
+        "rating": 5.8
+    },
+    {
+        "id": 85,
+        "name": "Action-packed Storm",
+        "genre": "Documentary",
+        "rating": 1.6
+    },
+    {
+        "id": 86,
+        "name": "Action-packed Quest",
+        "genre": "Action",
+        "rating": 0.7
+    },
+    {
+        "id": 87,
+        "name": "Amazing Shadow",
+        "genre": "Thriller",
+        "rating": 4.0
+    },
+    {
+        "id": 88,
+        "name": "Twisted Escape",
+        "genre": "Thriller",
+        "rating": 5.8
+    },
+    {
+        "id": 89,
+        "name": "Great Escape",
+        "genre": "Drama",
+        "rating": 4.2
+    },
+    {
+        "id": 90,
+        "name": "Thrilling Escape",
+        "genre": "Documentary",
+        "rating": 3.2
+    },
+    {
+        "id": 91,
+        "name": "Bright Nightmare",
+        "genre": "Sci-Fi",
+        "rating": 2.4
+    },
+    {
+        "id": 92,
+        "name": "Scary Journey",
+        "genre": "Horror",
+        "rating": 4.6
+    },
+    {
+        "id": 93,
+        "name": "Twisted Fire",
+        "genre": "Drama",
+        "rating": 0.1
+    }
+]
