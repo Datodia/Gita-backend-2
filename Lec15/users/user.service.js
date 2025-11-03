@@ -1,8 +1,34 @@
-const { readFile } = require("../utils")
+const userModel = require("./user.model")
 
 exports.getAllUsers2 = async (req, res) => {
-    const query = req.qeuery
-    const users = await readFile('users.json', true)
+    const queryParams = req.query || {}
+    const filter = {}
+
+    if ('isSmoker' in queryParams) {
+        filter['isSmoker'] = Number(queryParams.isSmoker) ? true : false
+    }
+
+    if ('email' in queryParams) {
+        filter['email'] = {
+            '$regex': `^${queryParams.email}`
+        }
+    }
+
+    if ('ageFrom' in queryParams) {
+        filter['age'] = {
+            ...filter['age'],
+            '$gte': Number(queryParams.ageFrom)
+        }
+    }
+
+    if ('ageTo' in queryParams) {
+        filter['age'] = {
+            ...filter['age'],
+            '$lte': Number(queryParams.ageTo)
+        }
+    }
+
+    const users = await userModel.find(filter)
     res.json(users)
 }
 
@@ -12,37 +38,54 @@ exports.createUser2 = async (req, res) => {
         res.status(400).json({ error: true, message: "body is required" })
         return
     }
-    const { name, age, hobbies } = req.body
-    if (!name || !age) {
-        res.status(400).json({ error: true, message: "name and age is required" })
+    const { name, age, email, isSmoker } = req.body
+    if (!name || !email) {
+        res.status(400).json({ error: true, message: "name and email is required" })
         return
     }
 
-    const users = await readFile('users.json', true)
-    const lastId = users[users.length - 1]?.id || 0
-
-    const newUser = {
-        id: lastId + 1,
+    const existUser = await userModel.findOne({ email })
+    if (existUser) {
+        return res.status(400).json({ error: true, message: "user already exists" })
+    }
+    const newUser = await userModel.create({
         name,
         age,
-        hobbies: hobbies || []
-    }
-    users.push(newUser)
+        isSmoker,
+        email,
+    })
 
-    await writeFile('users.json', users)
-    res.status(201).json({ success: true, message: "user created successfully" })
+    res.status(201).json({ success: true, data: newUser })
 }
 
 
 exports.getUserById2 = async (req, res) => {
-    const id = Number(req.params.id)
-    const users = await readFile('users.json', true)
-    const user = users.find(u => u.id === id)
-
+    const id = req.params.id
+    const user = await userModel.findById(id)
     if (!user) {
-        res.status(404).json({ error: true, message: "user not found" })
-        return
+        return res.status(404).json({ message: "user not found" })
     }
-
     res.json(user)
+}
+
+exports.deleteUserById2 = async (req, res) => {
+    const id = req.params.id
+    const deletedUser = await userModel.findByIdAndDelete(id)
+    if (!deletedUser) {
+        return res.status(404).json({ message: "user not found" })
+    }
+    res.json(deletedUser)
+}
+
+exports.updateUserById2 = async (req, res) => {
+    const id = req.params.id
+    const updateReq = {
+        name: req.body.name,
+        email: req.body.email
+    }
+    const updatedUser = await userModel.findByIdAndUpdate(id, updateReq, { new: true })
+    if (!updatedUser) {
+        return res.status(404).json({ message: "user not found" })
+    }
+    res.json(updatedUser)
 }

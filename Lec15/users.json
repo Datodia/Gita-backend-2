@@ -1,1 +1,8 @@
-[{"id":2,"name":"Giorgi","age":25,"hobbies":[]}]
+[
+    {
+        "id": 2,
+        "name": "Giorgi",
+        "age": 25,
+        "hobbies": []
+    }
+]

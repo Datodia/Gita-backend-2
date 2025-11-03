@@ -5,7 +5,9 @@ const userRouter2 = require('./users/user.controller')
 const { logger } = require('./middlewares/logger.middleware')
 const isAdminMiddleware = require('./middlewares/isAdmin.middleware')
 const roleMiddleware = require('./middlewares/role.middleware')
+const connectToDB = require('./config/db.config')
 const app = express()
+
 
 app.use(express.json())
 
@@ -39,7 +41,9 @@ app.use('/users', userRouter2)
 
 
 
-app.listen(3000, () => {
-    console.log('server running on http://localhost:3000')
+connectToDB().then(() => {
+    app.listen(3000, () => {
+        console.log('server running on http://localhost:3000')
+    })
 })
 
