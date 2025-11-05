@@ -6,6 +6,9 @@ const { logger } = require('./middlewares/logger.middleware')
 const isAdminMiddleware = require('./middlewares/isAdmin.middleware')
 const roleMiddleware = require('./middlewares/role.middleware')
 const connectToDB = require('./config/db.config')
+const authRouter = require('./auth/auth.controller')
+const isAuthMiddleware = require('./middlewares/isAuth.middleware')
+const postRouter = require('./posts/posts.controller')
 const app = express()
 
 
@@ -21,7 +24,7 @@ app.get('/products', roleMiddleware(['admin', 'editor', 'viewer']), (req, res) =
     res.send('getAllproductts')
 })
 
-app.post('/products', roleMiddleware(['admin', 'editor']), (req, res) => {
+app.post('/products', isAuthMiddleware, roleMiddleware(['admin', 'editor']), (req, res) => {
     res.send('create products')
 })
 
@@ -37,8 +40,11 @@ app.delete('/products/:id', roleMiddleware(['admin']), (req, res) => {
 // app.use('/users', userRouter)
 
 //Feature Based
+// /auth/sign-up
+// /auth/sign-in
 app.use('/users', userRouter2)
-
+app.use('/auth', authRouter)
+app.use('/posts', postRouter)
 
 
 connectToDB().then(() => {

@@ -28,7 +28,7 @@ exports.getAllUsers2 = async (req, res) => {
         }
     }
 
-    const users = await userModel.find(filter)
+    const users = await userModel.find(filter).populate('posts', 'title content')
     res.json(users)
 }
 
