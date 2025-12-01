@@ -1,4 +1,4 @@
-import { IsIn, IsNotEmpty, IsNumber, IsString } from "class-validator"
+import { IsIn, IsMongoId, IsNotEmpty, IsNumber, IsString } from "class-validator"
 
 
 export class CraeteExpenseDto {
@@ -11,4 +11,8 @@ export class CraeteExpenseDto {
     @IsString()
     @IsIn(['food', 'gym', 'electronics', 'shopping'])
     category: string
+
+    @IsNotEmpty()
+    @IsMongoId()
+    user: string
 }

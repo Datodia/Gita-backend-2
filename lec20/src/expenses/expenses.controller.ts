@@ -18,13 +18,14 @@ import { QueryParamsDTO } from './dto/pagination.dto';
 import type { Request, Response } from 'express';
 import { SafeGuard } from 'src/guards/safe.guard';
 import { RoleGuard } from 'src/guards/role.guard';
+import { IsValidObjectId } from 'src/common/dto/is-valid-object-id.dto';
 
 // @UseGuards(SafeGuard)
 @Controller('expenses')
 export class ExpensesController {
   constructor(private expensesService: ExpensesService) {}
 
-  @UseGuards(new RoleGuard('admin', 'editor', 'viewer'))
+  // @UseGuards(new RoleGuard('admin', 'editor', 'viewer'))
   @Get()
   // getAll( @Query(new ExpenseQuery()) query ){
   // getAll(@Req() req: Request, @Res() res: Response, @Query() query: QueryParamsDTO ){
@@ -35,15 +36,14 @@ export class ExpensesController {
 
   @UseGuards(new RoleGuard('admin', 'editor', 'viewer'))
   @Get(':id')
-  getById(@Param('id', ParseIntPipe) id) {
+  getById(@Param() {id}: IsValidObjectId) {
     return this.expensesService.getExpenseById(id);
   }
 
-  @UseGuards(new RoleGuard('admin'), SafeGuard)
+  // @UseGuards(new RoleGuard('admin'), SafeGuard)
   @Post()
   // createExpense(@Body(new CreateExpensePipe()) {amount, category}: CraeteExpenseDto){
   createExpense(@Body() createExpenseDto: CraeteExpenseDto) {
-    console.log(createExpenseDto, 'creatEExpenseDT');
     return this.expensesService.createExpense(createExpenseDto);
   }
 }

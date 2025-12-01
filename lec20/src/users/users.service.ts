@@ -1,38 +1,66 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ExpensesService } from 'src/expenses/expenses.service';
+import { InjectModel } from '@nestjs/mongoose';
+import  { Model, ObjectId } from 'mongoose';
+import { User } from './schema/users.schema';
 
 @Injectable()
 export class UsersService {
 
   constructor(
+    @InjectModel('user') private userModel: Model<User>,
     @Inject(forwardRef(() => ExpensesService))
     private expensesService: ExpensesService
   ){}
 
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  async create({age, email, fullName}: CreateUserDto) {
+    const existuser = await this.userModel.findOne({email})
+    if(existuser) throw new BadRequestException('user already exists')
+
+    const newUser = await this.userModel.create({age, email, fullName})
+    
+    return newUser
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.userModel.find().populate({path: 'expenses', select: '-user'})
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: string) {
+    const user = await this.userModel.findById(id)
+    if(!user) throw new NotFoundException('user not found')
+    return user
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    console.log(updateUserDto, "updateUserDto")
+    const updatedUser = await this.userModel.findByIdAndUpdate(
+      id,
+      updateUserDto,
+      {new: true}
+    )
+
+    if(!updatedUser) throw new NotFoundException('user not found')
+
+    return updatedUser
   }
 
-  remove(id: number) {
-    this.expensesService.deleteAllExpesesByUserId()
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    const deletedUser = await this.userModel.findByIdAndDelete(id)
+    if(!deletedUser) throw new NotFoundException('user not found')
+    
+    return deletedUser
   }
 
-  addExpenseToUser(){
-    return 'This action adds new expense in expeses list'
+  async addExpenseToUser(expenseId, userId){
+    const updatedUser = await this.userModel.findByIdAndUpdate(
+      userId,
+      {$push: {expenses: expenseId}},
+      {new: true}
+    )
+
+    return updatedUser
   }
 }

@@ -5,9 +5,17 @@ import { ExpensesModule } from './expenses/expenses.module';
 import { UsersModule } from './users/users.module';
 import { GetUserAgentMiddleware } from './middlewares/get-user-agent.middlewate';
 import { IsAdminMiddleware } from './middlewares/is-admin.middleware';
-
+import { ConfigModule } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
 @Module({
-  imports: [ExpensesModule, UsersModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
+    MongooseModule.forRoot(process.env.MONGO_URL!),
+    ExpensesModule, 
+    UsersModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
