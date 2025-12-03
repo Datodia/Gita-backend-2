@@ -19,9 +19,17 @@ import { userModel } from './schema/users.schema';
 })
 export class UsersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(GetUserAgentMiddleware)
-      .exclude({path: '/users', method: RequestMethod.DELETE})
-      .forRoutes({path: '/users', method: RequestMethod.ALL })
+    // consumer
+    //   .apply(GetUserAgentMiddleware)
+    //   .exclude({path: '/users', method: RequestMethod.DELETE})
+    //   .forRoutes({path: '/users', method: RequestMethod.ALL })
   }
 }
+
+// GET /users 304 - - 3504.208 ms
+// GET /users 304 - - 3900.769 ms
+// GET /users 304 - - 8786.500 ms
+// GET /users 304 - - 8194.658 ms
+// GET /users 304 - - 6532.715 ms
+
+

@@ -7,6 +7,7 @@ import { GetUserAgentMiddleware } from './middlewares/get-user-agent.middlewate'
 import { IsAdminMiddleware } from './middlewares/is-admin.middleware';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { PostsModule } from './posts/posts.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -14,7 +15,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     }),
     MongooseModule.forRoot(process.env.MONGO_URL!),
     ExpensesModule, 
-    UsersModule
+    UsersModule, PostsModule
   ],
   controllers: [AppController],
   providers: [AppService],
