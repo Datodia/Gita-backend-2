@@ -24,53 +24,40 @@ export class UsersService implements OnModuleInit {
 
   async onModuleInit() {
     const usersCount = await this.userModel.countDocuments();
+    // await this.userModel.deleteMany()
     console.log(usersCount, 'userCount');
-    if (usersCount === 0) {
-      let dataToInsert: any[] = [];
-      const BATCH_SIZE = 10_000;
-      for (let i = 0; i < 500_000; i++) {
-        dataToInsert.push({
-          fullName: faker.person.fullName(),
-          age: faker.number.int({ min: 15, max: 90 }),
-          email: faker.internet.email(),
-          address: {
-            home: faker.location.street(),
-            work: faker.location.street(),
-          },
-        });
+    // if (usersCount === 0) {
+    //   let dataToInsert: any[] = [];
+    //   const BATCH_SIZE = 10_000;
+    //   for (let i = 0; i < 500_000; i++) {
+    //     dataToInsert.push({
+    //       fullName: faker.person.fullName(),
+    //       age: faker.number.int({ min: 15, max: 90 }),
+    //       email: faker.internet.email(),
+    //       address: {
+    //         home: faker.location.street(),
+    //         work: faker.location.street(),
+    //       },
+    //     });
 
-        if (dataToInsert.length === BATCH_SIZE) {
-          await this.userModel.insertMany(dataToInsert);
-          console.log(`Inserted batch of ${BATCH_SIZE}`);
-          dataToInsert = [];
-        }
-      }
-      // Insert any remaining users (final batch)
-      if (dataToInsert.length > 0) {
-        await this.userModel.insertMany(dataToInsert);
-        console.log(`Inserted final batch of ${dataToInsert.length}`);
-      }
-      console.log('Finished inserting 500,000 users');
-    }
-  }
-
-  async create({ age, email, fullName, address }: CreateUserDto) {
-    const existuser = await this.userModel.findOne({ email });
-    if (existuser) throw new BadRequestException('user already exists');
-
-    const newUser = await this.userModel.create({
-      age,
-      email,
-      fullName,
-      address,
-    });
-
-    return newUser;
+    //     if (dataToInsert.length === BATCH_SIZE) {
+    //       await this.userModel.insertMany(dataToInsert);
+    //       console.log(`Inserted batch of ${BATCH_SIZE}`);
+    //       dataToInsert = [];
+    //     }
+    //   }
+    //   // Insert any remaining users (final batch)
+    //   if (dataToInsert.length > 0) {
+    //     await this.userModel.insertMany(dataToInsert);
+    //     console.log(`Inserted final batch of ${dataToInsert.length}`);
+    //   }
+    //   console.log('Finished inserting 500,000 users');
+    // }
   }
 
   findAll() {
     return this.userModel
-      .find({age: 48})
+      .find().populate('expenses', '-user -__v')
   }
 
   async findOne(id: string) {

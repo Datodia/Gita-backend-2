@@ -39,23 +39,6 @@ export class PostsService {
     return this.PostModel.find({title: new RegExp('^Audrey')}).explain()
   }
 
-// GET /posts 200 54149 - 1269.066 ms
-// GET /posts 200 54149 - 980.557 ms
-// GET /posts 200 54149 - 1003.189 ms
-// GET /posts 200 54149 - 982.412 ms
-// GET /posts 200 54149 - 974.478 ms
-// GET /posts 200 54149 - 973.503 ms
-// GET /posts 200 54149 - 1033.168 ms
-
-
-// GET /posts 200 54149 - 490.908 ms
-// GET /posts 200 54149 - 1083.168 ms
-// GET /posts 200 54149 - 461.839 ms
-// GET /posts 200 54149 - 462.007 ms
-// GET /posts 200 54149 - 454.838 ms
-// GET /posts 200 54149 - 447.005 ms
-// GET /posts 200 54149 - 448.699 ms
-// GET /posts 200 54149 - 448.549 ms
 
   findOne(id: number) {
     return `This action returns a #${id} post`;

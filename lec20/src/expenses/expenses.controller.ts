@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   ParseIntPipe,
@@ -19,6 +20,8 @@ import type { Request, Response } from 'express';
 import { SafeGuard } from 'src/guards/safe.guard';
 import { RoleGuard } from 'src/guards/role.guard';
 import { IsValidObjectId } from 'src/common/dto/is-valid-object-id.dto';
+import { IsAuthGuard } from 'src/guards/is-auth.guard';
+import { UserId } from 'src/decorators/user-id.decorator';
 
 // @UseGuards(SafeGuard)
 @Controller('expenses')
@@ -42,8 +45,16 @@ export class ExpensesController {
 
   // @UseGuards(new RoleGuard('admin'), SafeGuard)
   @Post()
+  @UseGuards(IsAuthGuard)
   // createExpense(@Body(new CreateExpensePipe()) {amount, category}: CraeteExpenseDto){
-  createExpense(@Body() createExpenseDto: CraeteExpenseDto) {
-    return this.expensesService.createExpense(createExpenseDto);
+  createExpense(@Body() createExpenseDto: CraeteExpenseDto, @UserId() userId) {
+    return this.expensesService.createExpense(createExpenseDto, userId);
+  }
+
+  @Delete(':id')
+  @UseGuards(IsAuthGuard)
+  deleteExpense(@Param() {id}: IsValidObjectId, @UserId() userId){
+
+    return this.expensesService.deleteExpenseById(id, userId)
   }
 }

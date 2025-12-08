@@ -25,6 +25,6 @@ export class CreateExpensePipe implements PipeTransform {
 
     value.amount = Number(value.amount);
 
-    return { amount: value.amount, category: value.category, user: value.user };
+    return { amount: value.amount, category: value.category };
   }
 }

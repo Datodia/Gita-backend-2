@@ -11,8 +11,4 @@ export class CraeteExpenseDto {
     @IsString()
     @IsIn(['food', 'gym', 'electronics', 'shopping'])
     category: string
-
-    @IsNotEmpty()
-    @IsMongoId()
-    user: string
 }

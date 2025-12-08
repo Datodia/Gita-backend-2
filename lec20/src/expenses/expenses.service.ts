@@ -3,6 +3,7 @@ import {
   Inject,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { IExpenses } from './interface/expense.interface';
 import { CraeteExpenseDto } from './dto/create-expense.dto';
@@ -23,7 +24,9 @@ export class ExpensesService {
   ) {}
 
   getAllExpenses({ page, take }: QueryParamsDTO) {
-    return this.expenseModel.find().populate({path: 'user', select: '-expenses'});
+    return this.expenseModel
+      .find()
+      .populate({ path: 'user', select: '-expenses' });
   }
 
   getExpenseById(id: string) {
@@ -32,15 +35,37 @@ export class ExpensesService {
     return expense;
   }
 
-  async createExpense({ amount, category, user }: CraeteExpenseDto) {
-    const newExpense = await this.expenseModel.create({amount, category, user})
+  async createExpense({ amount, category }: CraeteExpenseDto, userId) {
+    const newExpense = await this.expenseModel.create({
+      amount,
+      category,
+      user: userId,
+    });
     // await this.usersService.addExpenseToUser(newExpense._id, user)
     await this.userModel.findByIdAndUpdate(
-      user,
-      {$push: {expenses: newExpense._id}},
-      {new: true}
-    )
-    return newExpense
+      userId,
+      { $push: { expenses: newExpense._id } },
+      { new: true },
+    );
+    return newExpense;
+  }
+
+  async deleteExpenseById(expenseId, userId) {
+    const existExpense = await this.expenseModel.findById(expenseId);
+    if (!existExpense) throw new NotFoundException('Expense not found');
+
+    if(existExpense.user !== userId){
+      throw new UnauthorizedException('Permition denied') 
+    }
+
+    const deletedExpense = await this.expenseModel.findByIdAndDelete(expenseId);
+    if (!deletedExpense) throw new NotFoundException('Expense not found');
+
+    await this.userModel.findByIdAndUpdate(userId, {
+      $pull: { expenses: deletedExpense?._id },
+    });
+
+    return 'deleted successfully';
   }
 
   deleteAllExpesesByUserId() {}
