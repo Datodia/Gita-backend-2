@@ -13,12 +13,17 @@ async function bootstrap() {
   app.use(morgan('tiny'))
 
   // app.useGlobalGuards(new SafeGuard())
+
+  app.enableCors({
+    //use process env variable here
+    origin: ['http://localhost:3000']
+  })
   
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true,
     forbidNonWhitelisted: true,
     transform: true
   }))
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(process.env.PORT ?? 3001);
 }
 bootstrap();
