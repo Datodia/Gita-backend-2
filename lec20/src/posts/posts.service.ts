@@ -13,22 +13,23 @@ export class PostsService {
   async onModuleInit() {
     const postCount = await this.PostModel.countDocuments();
     console.log(postCount, 'postCoiunt');
+    await this.PostModel.deleteMany()
     let dataToInsert: any = [];
-    if (postCount === 50_000) {
-      for (let i = 0; i < 450_000; i++) {
-        dataToInsert.push({
-          title: faker.person.fullName(),
-          number: faker.number.int({ min: 15, max: 90 }),
-          desc: faker.internet.email(),
-        });
+    // if (postCount === 50_000) {
+    //   for (let i = 0; i < 450_000; i++) {
+    //     dataToInsert.push({
+    //       title: faker.person.fullName(),
+    //       number: faker.number.int({ min: 15, max: 90 }),
+    //       desc: faker.internet.email(),
+    //     });
 
-        if (dataToInsert.length === 10000) {
-          await this.PostModel.insertMany(dataToInsert);
-          console.log(`Inserted batch of ${10000}`);
-          dataToInsert = [];
-        }
-      }
-    }
+    //     if (dataToInsert.length === 10000) {
+    //       await this.PostModel.insertMany(dataToInsert);
+    //       console.log(`Inserted batch of ${10000}`);
+    //       dataToInsert = [];
+    //     }
+    //   }
+    // }
   }
 
   create(createPostDto: CreatePostDto) {

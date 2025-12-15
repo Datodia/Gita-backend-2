@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, Query } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { IsValidObjectId } from 'src/common/dto/is-valid-object-id.dto';
+import { PaginationDto } from './dto/pagination.dto';
 
 @Controller('users')
 export class UsersController {
@@ -10,8 +11,8 @@ export class UsersController {
 
   @Get()
   @HttpCode(200)
-  findAll() {
-    return this.usersService.findAll();
+  findAll( @Query() queryParams: PaginationDto ) {
+    return this.usersService.findAll(queryParams);
   }
 
   @Get(':id')

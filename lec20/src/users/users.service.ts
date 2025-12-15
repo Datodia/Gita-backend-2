@@ -13,6 +13,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model, ObjectId } from 'mongoose';
 import { User } from './schema/users.schema';
 import { fa, faker } from '@faker-js/faker';
+import { Role } from 'src/enum/role.enum';
+import { PaginationDto } from './dto/pagination.dto';
 
 @Injectable()
 export class UsersService implements OnModuleInit {
@@ -24,40 +26,36 @@ export class UsersService implements OnModuleInit {
 
   async onModuleInit() {
     const usersCount = await this.userModel.countDocuments();
+    // await this.userModel.updateMany(
+    //   {role: {$exists: false}},
+    //   {$set: {role: Role.ADMIN}}
+    // )
     // await this.userModel.deleteMany()
     console.log(usersCount, 'userCount');
-    // if (usersCount === 0) {
-    //   let dataToInsert: any[] = [];
-    //   const BATCH_SIZE = 10_000;
-    //   for (let i = 0; i < 500_000; i++) {
-    //     dataToInsert.push({
-    //       fullName: faker.person.fullName(),
-    //       age: faker.number.int({ min: 15, max: 90 }),
-    //       email: faker.internet.email(),
-    //       address: {
-    //         home: faker.location.street(),
-    //         work: faker.location.street(),
-    //       },
-    //     });
-
-    //     if (dataToInsert.length === BATCH_SIZE) {
-    //       await this.userModel.insertMany(dataToInsert);
-    //       console.log(`Inserted batch of ${BATCH_SIZE}`);
-    //       dataToInsert = [];
-    //     }
-    //   }
-    //   // Insert any remaining users (final batch)
-    //   if (dataToInsert.length > 0) {
-    //     await this.userModel.insertMany(dataToInsert);
-    //     console.log(`Inserted final batch of ${dataToInsert.length}`);
-    //   }
-    //   console.log('Finished inserting 500,000 users');
-    // }
+    if (usersCount === 6) {
+      let dataToInsert: any[] = [];
+      for (let i = 0; i < 5000; i++) {
+        dataToInsert.push({
+          fullName: faker.person.fullName(),
+          age: faker.number.int({ min: 15, max: 90 }),
+          email: `${i}${faker.internet.email()}`,
+          password: faker.person.fullName(),
+        });
+      }
+      // Insert any remaining users (final batch)
+     
+        await this.userModel.insertMany(dataToInsert);
+        console.log(`Inserted final batch of ${dataToInsert.length}`);
+    }
   }
 
-  findAll() {
+  findAll({page, take}: PaginationDto) {
+    const skip = (page - 1) * take
+
     return this.userModel
-      .find().populate('expenses', '-user -__v')
+      .find({}, {fullName: 1, email: 1, age: 1, _id: 0})
+      .skip(skip)
+      .limit(take)
   }
 
   async findOne(id: string) {
