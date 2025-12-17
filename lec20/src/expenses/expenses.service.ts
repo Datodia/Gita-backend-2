@@ -29,8 +29,8 @@ export class ExpensesService {
       .populate({ path: 'user', select: '-expenses' });
   }
 
-  getExpenseById(id: string) {
-    const expense = this.expenseModel.findById(id);
+  async getExpenseById(id: string) {
+    const expense = await this.expenseModel.findById(id).populate('user').select('-expenses');
     if (!expense) throw new NotFoundException('Expense not found');
     return expense;
   }
