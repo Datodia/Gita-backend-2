@@ -15,13 +15,14 @@ import { User } from './schema/users.schema';
 import { fa, faker } from '@faker-js/faker';
 import { Role } from 'src/enum/role.enum';
 import { PaginationDto } from './dto/pagination.dto';
+import { AwsS3Service } from 'src/aws-s3/aws-s3.service';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class UsersService implements OnModuleInit {
   constructor(
+    private awsS3Service: AwsS3Service,
     @InjectModel('user') private userModel: Model<User>,
-    @Inject(forwardRef(() => ExpensesService))
-    private expensesService: ExpensesService,
   ) {}
 
   async onModuleInit() {
@@ -47,6 +48,36 @@ export class UsersService implements OnModuleInit {
         await this.userModel.insertMany(dataToInsert);
         console.log(`Inserted final batch of ${dataToInsert.length}`);
     }
+  }
+
+  async uploadUserPhoto(file: Express.Multer.File){
+    const ext = file.mimetype.split('/')[1]
+    const fileId = `images/${randomUUID()}.${ext}`
+    const result = await this.awsS3Service.uploadFile(fileId, file.buffer, file.mimetype)
+    // await userModel.findByIdAndUpdate(userId, {profileImage: fileId}, {new: true})
+    return result
+  }
+
+  async uploadMany(files: Express.Multer.File[]){
+    const uploadedImages: string[] = []
+    for(let file of files){
+      const ext = file.mimetype.split('/')[1]
+      const fileId = `images/${randomUUID()}.${ext}`
+      const result = await this.awsS3Service.uploadFile(fileId, file.buffer, file.mimetype)
+      uploadedImages.push(result)
+    }
+
+    return uploadedImages
+  }
+
+  async getFile(fileId: string){
+    const result = await this.awsS3Service.getFile(fileId)
+    return result
+  }
+
+  async deleteFile(fileId: string){
+    const result = await this.awsS3Service.deleteFile(fileId)
+    return result
   }
 
   findAll({page, take}: PaginationDto) {

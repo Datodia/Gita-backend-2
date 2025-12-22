@@ -5,14 +5,16 @@ import { GetUserAgentMiddleware } from 'src/middlewares/get-user-agent.middlewat
 import { ExpensesModule } from 'src/expenses/expenses.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { userModel } from './schema/users.schema';
+import { AwsS3Module } from 'src/aws-s3/aws-s3.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([
       {name: 'user', schema: userModel}
     ]),
-    forwardRef(() => ExpensesModule
-  )],
+    forwardRef(() => ExpensesModule),
+    AwsS3Module
+  ],
   controllers: [UsersController],
   providers: [UsersService],
   exports: [UsersService]

@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PostsModule } from './posts/posts.module';
 import { AuthModule } from './auth/auth.module';
+import { AwsS3Module } from './aws-s3/aws-s3.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -16,7 +17,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     MongooseModule.forRoot(process.env.MONGO_URL!),
     ExpensesModule, 
-    UsersModule, PostsModule, AuthModule
+    UsersModule, PostsModule, AuthModule, AwsS3Module
   ],
   controllers: [AppController],
   providers: [AppService],
@@ -27,8 +28,8 @@ export class AppModule implements NestModule {
     //   .apply(GetUserAgentMiddleware)
     //   .forRoutes({path: '/expenses', method: RequestMethod.ALL})
 
-    consumer
-      .apply(IsAdminMiddleware(['editor']))
-      .forRoutes({path: '/users/*', method: RequestMethod.DELETE})
+    // consumer
+    //   .apply(IsAdminMiddleware(['editor']))
+    //   .forRoutes({path: '/users/*', method: RequestMethod.DELETE})
   }
 }
