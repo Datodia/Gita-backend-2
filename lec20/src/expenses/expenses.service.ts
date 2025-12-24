@@ -8,11 +8,11 @@ import {
 import { IExpenses } from './interface/expense.interface';
 import { CraeteExpenseDto } from './dto/create-expense.dto';
 import { QueryParamsDTO } from './dto/pagination.dto';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Expenses } from './schema/expense.schema';
-import { User } from 'src/users/schema/users.schema';
+import { User } from '../users/schema/users.schema';
 
 @Injectable()
 export class ExpensesService {

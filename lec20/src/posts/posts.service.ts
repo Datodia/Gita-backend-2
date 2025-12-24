@@ -1,14 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { isValidObjectId, Model } from 'mongoose';
 import { Post } from './entities/post.entity';
 import { faker } from '@faker-js/faker';
+import { userModel } from 'src/users/schema/users.schema';
 
 @Injectable()
 export class PostsService {
-  constructor(@InjectModel('post') private PostModel: Model<Post>) {}
+  constructor(
+    @InjectModel('post') private PostModel: Model<Post>
+  ) {}
 
   async onModuleInit() {
     const postCount = await this.PostModel.countDocuments();
@@ -32,17 +35,23 @@ export class PostsService {
     // }
   }
 
-  create(createPostDto: CreatePostDto) {
-    return 'This action adds a new post';
+  async create(createPostDto: CreatePostDto) {
+    const newPost = await this.PostModel.create(createPostDto)
+    return newPost
   }
 
   findAll() {
-    return this.PostModel.find({title: new RegExp('^Audrey')}).explain()
+    return this.PostModel.find()
   }
 
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  async findOne(id: string) {
+    if(!isValidObjectId(id)) throw new BadRequestException('Invalid Id provided')
+
+    const post = await this.PostModel.findById(id)
+    if(!post) throw new NotFoundException('post not found')
+    
+    return post
   }
 
   update(id: number, updatePostDto: UpdatePostDto) {
