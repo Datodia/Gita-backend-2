@@ -68,6 +68,23 @@ export class User {
         type: Boolean,
     })
     isMerried: Boolean
+
+    @Prop({
+        type: Boolean,
+        default: false
+    })
+    isVerfied: boolean
+
+    @Prop({
+        type: String,
+    })
+    OTPCode: string
+
+
+    @Prop({
+        type: String,
+    })
+    OTPCodeExpirationDate: string
 }
 
 export const userModel = SchemaFactory.createForClass(User)

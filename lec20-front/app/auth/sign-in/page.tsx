@@ -35,6 +35,7 @@ export default function SignIn() {
   const router = useRouter();
 
   const onSubmit = async (data: SignInType) => {
+    localStorage.setItem('auth_email', data.email)
     try{
         setLoader(true)
         const resp = await axiosInstance.post('/auth/sign-in', data)
@@ -43,6 +44,10 @@ export default function SignIn() {
             router.push('/')
         }
     }catch(e: any){
+        if(e.response.data.message === 'Verify User'){
+          router.push('/auth/verify-otp')
+          return
+        }
         toast.error(e.response.data.message)
     }finally{
         setLoader(false)

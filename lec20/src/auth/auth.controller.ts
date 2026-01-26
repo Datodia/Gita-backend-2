@@ -13,6 +13,8 @@ import {
   ApiResponse,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { VerifyUserDto } from './dto/verify-user.dto';
+import { ResendVerificationCodeDto } from './dto/resend-verification-code.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -29,6 +31,16 @@ export class AuthController {
   @ApiCreatedResponse({ example: 'User created successfully' })
   signUp(@Body() signUpDto: SignUpDto) {
     return this.authService.signUp(signUpDto);
+  }
+
+  @Post('verify-user')
+  verifyUser(@Body() verifyUserDto: VerifyUserDto){
+    return this.authService.verifyUser(verifyUserDto)
+  }
+
+  @Post('resend-verification-code')
+  resendVerifyCode(@Body() resendVerificationCodeDto: ResendVerificationCodeDto){
+    return this.authService.resendVerificationCode(resendVerificationCodeDto)
   }
 
   @Post('sign-in')

@@ -38,8 +38,9 @@ export default function SignUp() {
         setLoader(true)
         const resp = await axiosInstance.post('/auth/sign-up', data)
         if(resp.status === 201){
-            toast.success('User registered successfully')
-            router.push('/auth/sign-in')
+            toast.success('Check Email for Verofy')
+            localStorage.setItem('auth_email', data.email)
+            router.push('/auth/verify-otp')
         }
     }catch(e: any){
         console.log(e, "error")
