@@ -6,6 +6,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
 import { userModel } from 'src/users/schema/users.schema';
 import { EmailSenderModule } from 'src/email-sender/email-sender.module';
+import { PassportModule } from '@nestjs/passport';
+import { GoogleStrategy } from './strategies/google.strategy';
 
 @Module({
   imports: [
@@ -16,8 +18,9 @@ import { EmailSenderModule } from 'src/email-sender/email-sender.module';
     }),
     EmailSenderModule,
     MongooseModule.forFeature([{ name: 'user', schema: userModel }]),
+    PassportModule.register({defaultStrategy: 'google'})
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, GoogleStrategy],
 })
 export class AuthModule {}

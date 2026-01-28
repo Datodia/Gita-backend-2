@@ -14,6 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Label } from "@radix-ui/react-label";
 import { deleteCookie, getCookie } from "cookies-next";
 import { Loader, Loader2 } from "lucide-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -108,6 +109,7 @@ export default function Home() {
   return (
     <div className="p-4">
       <h1 className="text-center">Home Page</h1>
+      {user.profilePic && <Image src={user.profilePic} alt="profile pic" width={50} height={50} />}
       <p className="font-bold">{user.fullName}</p>
       <p className="font-bold">{user.email}</p>
       <Button onClick={handleLogOut}>Log out</Button>

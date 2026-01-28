@@ -38,14 +38,14 @@ export class User {
 
     @Prop({
         type: String,
-        required: true,
+        // required: true,
         select: false
     })
     password: string
         
     @Prop({
         type: Number,
-        required: true,
+        // required: true,
         index: true
     })
     age: number
@@ -85,6 +85,11 @@ export class User {
         type: String,
     })
     OTPCodeExpirationDate: string
+
+    @Prop({
+        type: String
+    })
+    profilePic: string
 }
 
 export const userModel = SchemaFactory.createForClass(User)

@@ -7,6 +7,7 @@ export type User = {
     expenses: Omit<Expense, 'user'>[]
     fullName: string;
     updatedAt: string;
+    profilePic: string
     __v: number;
     _id: string;
 }

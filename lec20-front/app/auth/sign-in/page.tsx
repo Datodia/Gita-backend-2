@@ -54,6 +54,10 @@ export default function SignIn() {
     }
   };
 
+  const handleGoogleAuth = () => {
+    window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/auth/google`
+  }
+
   return (
     <div className="flex justify-center items-center h-screen">
       <Card className="w-full max-w-sm">
@@ -106,7 +110,7 @@ export default function SignIn() {
             {loader ? <Button disabled={loader}> <Loader2 className="animate-spin" /> </Button> :<Button type="submit" className="w-full">
               Login
             </Button>}
-            <Button variant="outline" className="w-full">
+            <Button type="button" onClick={handleGoogleAuth} variant="outline" className="w-full">
               Login with Google
             </Button>
           </CardFooter>

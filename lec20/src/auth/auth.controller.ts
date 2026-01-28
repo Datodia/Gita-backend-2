@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { SignUpDto } from './dto/sign-up.dto';
@@ -15,6 +15,7 @@ import {
 } from '@nestjs/swagger';
 import { VerifyUserDto } from './dto/verify-user.dto';
 import { ResendVerificationCodeDto } from './dto/resend-verification-code.dto';
+import { GoogleOauthGuard } from 'src/guards/google.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -32,6 +33,22 @@ export class AuthController {
   signUp(@Body() signUpDto: SignUpDto) {
     return this.authService.signUp(signUpDto);
   }
+
+
+  @Get('google')
+  @UseGuards(GoogleOauthGuard)
+  signInWithGoogle(){}
+
+
+  @Get('google/callback')
+  @UseGuards(GoogleOauthGuard)
+  async googleAuthCallback(@Req() req, @Res() res){
+    const {token, redirectUrl} = await this.authService.signInWithGoogle(req.user)
+
+    res.cookie('token', token, {maxAge: 60 * 60 * 1000})
+    res.redirect(redirectUrl)
+  }
+
 
   @Post('verify-user')
   verifyUser(@Body() verifyUserDto: VerifyUserDto){
