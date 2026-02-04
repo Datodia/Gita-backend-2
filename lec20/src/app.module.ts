@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ExpensesModule } from './expenses/expenses.module';
@@ -12,10 +17,12 @@ import { AuthModule } from './auth/auth.module';
 import { AwsS3Module } from './aws-s3/aws-s3.module';
 import { EmailSenderModule } from './email-sender/email-sender.module';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { GatewayGateway } from './gateway/gateway.gateway';
+import { userModel } from './users/schema/users.schema';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
     }),
     MongooseModule.forRoot(process.env.MONGO_URL!),
     MailerModule.forRoot({
@@ -24,26 +31,26 @@ import { MailerModule } from '@nestjs-modules/mailer';
         port: 465,
         auth: {
           user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS
-        }
-      }
+          pass: process.env.EMAIL_PASS,
+        },
+      },
     }),
-    ExpensesModule, 
-    UsersModule, 
-    PostsModule, 
-    AuthModule, 
-    AwsS3Module, 
-    EmailSenderModule
+    MongooseModule.forFeature([{ name: 'user', schema: userModel }]),
+    ExpensesModule,
+    UsersModule,
+    PostsModule,
+    AuthModule,
+    AwsS3Module,
+    EmailSenderModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, GatewayGateway],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     // consumer
     //   .apply(GetUserAgentMiddleware)
     //   .forRoutes({path: '/expenses', method: RequestMethod.ALL})
-
     // consumer
     //   .apply(IsAdminMiddleware(['editor']))
     //   .forRoutes({path: '/users/*', method: RequestMethod.DELETE})
