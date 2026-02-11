@@ -17,7 +17,7 @@ async function bootstrap() {
 
   app.enableCors({
     //use process env variable here
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000', process.env.FRONT_URL],
   });
 
   const config = new DocumentBuilder()

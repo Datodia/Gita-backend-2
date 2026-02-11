@@ -12,7 +12,7 @@ async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.use((0, morgan_1.default)('tiny'));
     app.enableCors({
-        origin: ['http://localhost:3000'],
+        origin: ['http://localhost:3000', process.env.FRONT_URL],
     });
     const config = new swagger_1.DocumentBuilder()
         .setTitle('Simple Users and posts Backend API with JWT AUTH')
