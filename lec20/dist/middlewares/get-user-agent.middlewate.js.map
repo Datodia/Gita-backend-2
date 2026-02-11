@@ -1,0 +1,1 @@
+{"version":3,"file":"get-user-agent.middlewate.js","sourceRoot":"","sources":["../../src/middlewares/get-user-agent.middlewate.ts"],"names":[],"mappings":";;;AAIA,MAAa,sBAAsB;IAC/B,GAAG,CAAC,GAAY,EAAE,GAAa,EAAE,IAAkB;QAC/C,OAAO,CAAC,GAAG,CAAC,GAAG,CAAC,OAAO,CAAC,YAAY,CAAC,CAAC,CAAA;QAGtC,IAAI,EAAE,CAAA;IACV,CAAC;CACJ;AAPD,wDAOC"}
