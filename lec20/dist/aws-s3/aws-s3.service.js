@@ -21,8 +21,8 @@ let AwsS3Service = class AwsS3Service {
         this.s3Service = new client_s3_1.S3Client({
             region: process.env.AWS_REGION,
             credentials: {
-                secretAccessKey: process.env.AWS_SECRET_KEY,
-                accessKeyId: process.env.AWS_ACCESS_KEY
+                secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+                accessKeyId: process.env.AWS_ACCESS_KEY_ID
             }
         });
     }
